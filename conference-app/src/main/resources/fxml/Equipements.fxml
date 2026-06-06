@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="conference.controller.EquipementsController"
+           orientation="HORIZONTAL" dividerPositions="0.65"
+           styleClass="page-container-split">
+
+    <VBox spacing="12" styleClass="page-container">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Gestion des Équipements" styleClass="page-title"/>
+                <Label text="Gérez les équipements disponibles pour les réservations" styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="+ Nouvel Équipement" onAction="#handleNouvelEquipement" styleClass="btn-primary"/>
+            <Button text="🔄 Actualiser" onAction="#handleRafraichir" styleClass="btn-secondary"/>
+        </HBox>
+        
+        <HBox styleClass="filter-bar" spacing="10" alignment="CENTER_LEFT">
+            <TextField fx:id="tfRecherche" promptText="🔍 Rechercher..." prefWidth="200"/>
+            <ComboBox fx:id="cbFiltreType" prefWidth="160"/>
+        </HBox>
+        
+        <TableView fx:id="tableEquipements" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colNom" text="Nom" prefWidth="200"/>
+                <TableColumn fx:id="colType" text="Type" prefWidth="120"/>
+                <TableColumn fx:id="colEtat" text="État" prefWidth="110"/>
+                <TableColumn fx:id="colQteTotale" text="Qté Total" prefWidth="90"/>
+                <TableColumn fx:id="colQteDisponible" text="Disponible" prefWidth="90"/>
+                <TableColumn fx:id="colSerie" text="N° Série" prefWidth="130"/>
+            </columns>
+            <placeholder><Label text="Aucun équipement trouvé"/></placeholder>
+        </TableView>
+    </VBox>
+    
+    <VBox fx:id="formPane" spacing="12" styleClass="page-container form-panel" minWidth="300">
+        <Label fx:id="lblFormTitre" text="Nouvel Équipement" styleClass="form-section-title"/>
+        <VBox spacing="4"><Label text="Nom *" styleClass="form-label"/><TextField fx:id="tfNom" promptText="Nom de l'équipement"/></VBox>
+        <VBox spacing="4"><Label text="Description" styleClass="form-label"/><TextArea fx:id="taDescription" prefRowCount="2"/></VBox>
+        <HBox spacing="10">
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Type *" styleClass="form-label"/><ComboBox fx:id="cbType" maxWidth="Infinity"/></VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="État" styleClass="form-label"/><ComboBox fx:id="cbEtat" maxWidth="Infinity"/></VBox>
+        </HBox>
+        <HBox spacing="10">
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Qté totale" styleClass="form-label"/><TextField fx:id="tfQteTotale" text="1"/></VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Qté disponible" styleClass="form-label"/><TextField fx:id="tfQteDisponible" text="1"/></VBox>
+        </HBox>
+        <VBox spacing="4"><Label text="N° de série" styleClass="form-label"/><TextField fx:id="tfNumeroSerie"/></VBox>
+        <Region VBox.vgrow="ALWAYS"/>
+        <HBox spacing="10">
+            <Button text="💾 Sauvegarder" onAction="#handleSauvegarder" styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button text="Annuler" onAction="#handleAnnulerForm" styleClass="btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+    </VBox>
+    
+</SplitPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="conference.controller.ProfilController"
+      spacing="20" styleClass="page-container" maxWidth="600">
+
+    <Label text="Mon Profil" styleClass="page-title"/>
+
+    <VBox styleClass="card" spacing="16">
+        <Label text="Informations Personnelles" styleClass="card-title"/>
+        <HBox spacing="10">
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Nom" styleClass="form-label"/><TextField fx:id="tfNom"/></VBox>
+            <VBox spacing="4" HBox.hgrow="ALWAYS"><Label text="Prénom" styleClass="form-label"/><TextField fx:id="tfPrenom"/></VBox>
+        </HBox>
+        <VBox spacing="4"><Label text="Email" styleClass="form-label"/><TextField fx:id="tfEmail"/></VBox>
+        <VBox spacing="4"><Label text="Téléphone" styleClass="form-label"/><TextField fx:id="tfTelephone"/></VBox>
+        <HBox spacing="4" alignment="CENTER_LEFT">
+            <Label text="Rôle:" styleClass="form-label"/>
+            <Label fx:id="lblRole" style="-fx-font-weight: bold; -fx-text-fill: #1565C0;"/>
+        </HBox>
+        <Button text="💾 Sauvegarder les modifications" onAction="#handleSauvegarderProfil" styleClass="btn-primary"/>
+    </VBox>
+
+    <VBox styleClass="card" spacing="16">
+        <Label text="Changer le Mot de Passe" styleClass="card-title"/>
+        <VBox spacing="4"><Label text="Mot de passe actuel" styleClass="form-label"/><PasswordField fx:id="pfActuel"/></VBox>
+        <VBox spacing="4"><Label text="Nouveau mot de passe" styleClass="form-label"/><PasswordField fx:id="pfNouveau"/></VBox>
+        <VBox spacing="4"><Label text="Confirmer le nouveau mot de passe" styleClass="form-label"/><PasswordField fx:id="pfConfirmer"/></VBox>
+        <Button text="🔒 Changer le mot de passe" onAction="#handleChangerMotDePasse" styleClass="btn-secondary"/>
+    </VBox>
+
+</VBox>

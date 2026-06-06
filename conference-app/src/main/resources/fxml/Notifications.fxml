@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="conference.controller.NotificationsController"
+      spacing="16" styleClass="page-container">
+    
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <VBox HBox.hgrow="ALWAYS">
+            <Label text="Notifications" styleClass="page-title"/>
+            <Label fx:id="lblTotalNonLues" text="0 non lue(s)" styleClass="page-subtitle"/>
+        </VBox>
+        <Button text="✓ Tout marquer comme lu" onAction="#handleMarquerToutesLues" styleClass="btn-secondary"/>
+        <Button text="🔄 Actualiser" onAction="#handleRafraichir" styleClass="btn-secondary"/>
+    </HBox>
+    
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox fx:id="listNotifications" spacing="8" style="-fx-padding: 4;"/>
+    </ScrollPane>
+    
+</VBox>

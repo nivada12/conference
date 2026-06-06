@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="conference.controller.DashboardController"
+      spacing="16" styleClass="page-container">
+    
+    <!-- En-tête -->
+    <VBox spacing="4">
+        <Label text="Tableau de Bord" styleClass="page-title"/>
+        <Label fx:id="lblBienvenue" styleClass="page-subtitle"/>
+    </VBox>
+    
+    <!-- Cartes de statistiques -->
+    <HBox spacing="16">
+        <!-- Total réservations -->
+        <VBox styleClass="stat-card stat-blue" HBox.hgrow="ALWAYS" spacing="8" alignment="CENTER">
+            <Label text="📅" style="-fx-font-size: 32px;"/>
+            <Label fx:id="lblTotalReservations" text="0" styleClass="stat-number"/>
+            <Label text="Total Réservations" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Salles disponibles -->
+        <VBox styleClass="stat-card stat-green" HBox.hgrow="ALWAYS" spacing="8" alignment="CENTER">
+            <Label text="🚪" style="-fx-font-size: 32px;"/>
+            <Label fx:id="lblSallesDisponibles" text="0" styleClass="stat-number"/>
+            <Label text="Salles Actives" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Réservations aujourd'hui -->
+        <VBox styleClass="stat-card stat-orange" HBox.hgrow="ALWAYS" spacing="8" alignment="CENTER">
+            <Label text="📆" style="-fx-font-size: 32px;"/>
+            <Label fx:id="lblReservationsAujourdHui" text="0" styleClass="stat-number"/>
+            <Label text="Réservations Aujourd'hui" styleClass="stat-label"/>
+        </VBox>
+        
+        <!-- Équipements défectueux -->
+        <VBox styleClass="stat-card stat-red" HBox.hgrow="ALWAYS" spacing="8" alignment="CENTER">
+            <Label text="⚠️" style="-fx-font-size: 32px;"/>
+            <Label fx:id="lblEquipementsDefectueux" text="0" styleClass="stat-number"/>
+            <Label text="Équipements Défectueux" styleClass="stat-label"/>
+        </VBox>
+    </HBox>
+    
+    <!-- Graphiques -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <!-- Graphique barres - réservations par mois -->
+        <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="8">
+            <Label text="Réservations par Mois" styleClass="card-title"/>
+            <BarChart fx:id="chartReservations" VBox.vgrow="ALWAYS"
+                      animated="false" legendVisible="false">
+                <xAxis><CategoryAxis label="Mois"/></xAxis>
+                <yAxis><NumberAxis label="Nombre"/></yAxis>
+            </BarChart>
+        </VBox>
+        
+        <!-- Graphique camembert - utilisation des salles -->
+        <VBox styleClass="card" prefWidth="350" spacing="8">
+            <Label text="Utilisation des Salles" styleClass="card-title"/>
+            <PieChart fx:id="chartSalles" VBox.vgrow="ALWAYS" animated="false"/>
+        </VBox>
+    </HBox>
+    
+    <!-- Prochaines réservations -->
+    <VBox styleClass="card" spacing="8" VBox.vgrow="ALWAYS">
+        <Label text="Prochaines Réservations" styleClass="card-title"/>
+        <TableView fx:id="tableProchaines" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colCode" text="Code" prefWidth="120"/>
+                <TableColumn fx:id="colTitre" text="Titre" prefWidth="200"/>
+                <TableColumn fx:id="colSalle" text="Salle" prefWidth="150"/>
+                <TableColumn fx:id="colDate" text="Date &amp; Heure" prefWidth="150"/>
+                <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+            </columns>
+            <placeholder><Label text="Aucune réservation à venir"/></placeholder>
+        </TableView>
+    </VBox>
+    
+</VBox>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="conference.controller.CalendrierController"
+      spacing="0" styleClass="page-container-split">
+
+    <!-- CALENDRIER PRINCIPAL -->
+    <VBox spacing="12" styleClass="page-container" HBox.hgrow="ALWAYS">
+
+        <!-- En-tête navigation -->
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Calendrier des Réservations" styleClass="page-title"/>
+                <Label text="Visualisez toutes les réservations par mois" styleClass="page-subtitle"/>
+            </VBox>
+
+            <Button text="◀" onAction="#handleMoisPrecedent" styleClass="btn-secondary" style="-fx-font-size: 16px; -fx-padding: 6 14;"/>
+
+            <!-- Label pour afficher le mois (pas un Button) -->
+            <Label fx:id="lblMoisAnnee" text="Mars 2026"
+                   style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1A237E; -fx-min-width: 180; -fx-alignment: center;"/>
+
+            <Button text="▶" onAction="#handleMoisSuivant" styleClass="btn-secondary" style="-fx-font-size: 16px; -fx-padding: 6 14;"/>
+            <Button text="Aujourd'hui" onAction="#handleAujourdhui" styleClass="btn-secondary"/>
+        </HBox>
+
+        <!-- Légende -->
+        <HBox spacing="16" alignment="CENTER_LEFT" style="-fx-padding: 4 0;">
+            <HBox spacing="4" alignment="CENTER_LEFT">
+                <Label text="●" style="-fx-text-fill: #4CAF50;"/>
+                <Label text="Confirmé" style="-fx-font-size: 11px; -fx-text-fill: #546E7A;"/>
+            </HBox>
+            <HBox spacing="4" alignment="CENTER_LEFT">
+                <Label text="●" style="-fx-text-fill: #FFA500;"/>
+                <Label text="En attente" style="-fx-font-size: 11px; -fx-text-fill: #546E7A;"/>
+            </HBox>
+            <HBox spacing="4" alignment="CENTER_LEFT">
+                <Label text="■" style="-fx-text-fill: #1565C0;"/>
+                <Label text="Aujourd'hui" style="-fx-font-size: 11px; -fx-text-fill: #546E7A;"/>
+            </HBox>
+        </HBox>
+
+        <!-- Grille calendrier -->
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="cal-scroll">
+            <GridPane fx:id="grilleCal" hgap="3" vgap="3"
+                      style="-fx-padding: 4; -fx-background-color: #F5F7FA;">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="14.28"/>
+                </columnConstraints>
+            </GridPane>
+        </ScrollPane>
+
+    </VBox>
+
+    <!-- PANNEAU DÉTAILS JOUR -->
+    <VBox prefWidth="300" spacing="12" styleClass="page-container form-panel">
+        <Label text="Détails du jour" styleClass="form-section-title"/>
+        <Label fx:id="lblDateSelectionnee" text="Cliquez sur un jour"
+               style="-fx-font-size: 13px; -fx-text-fill: #546E7A; -fx-wrap-text: true;"/>
+        <Separator/>
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+            <VBox fx:id="listeResJour" spacing="6" style="-fx-padding: 4;">
+                <Label text="Sélectionnez un jour pour voir les réservations"
+                       style="-fx-text-fill: #90A4AE; -fx-font-size: 12px; -fx-wrap-text: true;"/>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+</HBox>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="conference.controller.ReservationsController"
+           orientation="HORIZONTAL" dividerPositions="0.65"
+           styleClass="page-container-split">
+
+    <!-- LISTE DES RÉSERVATIONS -->
+    <VBox spacing="12" styleClass="page-container">
+        
+        <!-- En-tête -->
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Gestion des Réservations" styleClass="page-title"/>
+                <Label text="Créez et gérez vos réservations de salles" styleClass="page-subtitle"/>
+            </VBox>
+            <Button fx:id="btnNouvelleReservation" text="+ Nouvelle Réservation"
+                    onAction="#handleNouvelleReservation" styleClass="btn-primary"/>
+            <Button text="🔄 Actualiser" onAction="#handleRafraichir" styleClass="btn-secondary"/>
+        </HBox>
+        
+        <!-- Filtres -->
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-bar">
+            <TextField fx:id="tfRecherche" promptText="🔍 Rechercher..." prefWidth="200"/>
+            <ComboBox fx:id="cbFiltreStatut" prefWidth="150"/>
+            <DatePicker fx:id="dpFiltreDate" promptText="Filtrer par date" prefWidth="160"/>
+            <Button text="✕ Effacer" onAction="#handleEffacerFiltres" styleClass="btn-link"/>
+        </HBox>
+        
+        <!-- Table -->
+        <TableView fx:id="tableReservations" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colCode" text="Code" prefWidth="120"/>
+                <TableColumn fx:id="colTitre" text="Titre" prefWidth="180"/>
+                <TableColumn fx:id="colSalle" text="Salle" prefWidth="130"/>
+                <TableColumn fx:id="colUser" text="Réservé par" prefWidth="130"/>
+                <TableColumn fx:id="colDateDebut" text="Début" prefWidth="130"/>
+                <TableColumn fx:id="colDateFin" text="Fin" prefWidth="130"/>
+                <TableColumn fx:id="colDuree" text="Durée" prefWidth="70"/>
+                <TableColumn fx:id="colParticipants" text="Part." prefWidth="60"/>
+                <TableColumn fx:id="colStatut" text="Statut" prefWidth="100"/>
+            </columns>
+            <placeholder>
+                <Label text="Aucune réservation trouvée"/>
+            </placeholder>
+        </TableView>
+        
+    </VBox>
+    
+    <!-- FORMULAIRE DE RÉSERVATION -->
+    <VBox fx:id="formPane" spacing="12" styleClass="page-container form-panel" minWidth="350">
+        
+        <Label fx:id="lblFormTitre" text="Nouvelle Réservation" styleClass="form-section-title"/>
+        
+        <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+            <VBox spacing="12" style="-fx-padding: 4;">
+                
+                <!-- Titre -->
+                <VBox spacing="4">
+                    <Label text="Titre de la réunion *" styleClass="form-label"/>
+                    <TextField fx:id="tfTitre" promptText="Ex: Réunion mensuelle équipe..."/>
+                </VBox>
+                
+                <!-- Description -->
+                <VBox spacing="4">
+                    <Label text="Description" styleClass="form-label"/>
+                    <TextArea fx:id="taDescription" promptText="Description de la réunion..." prefRowCount="2"/>
+                </VBox>
+                
+                <!-- Salle -->
+                <VBox spacing="4">
+                    <Label text="Salle *" styleClass="form-label"/>
+                    <ComboBox fx:id="cbSalle" maxWidth="Infinity" promptText="Sélectionner une salle"/>
+                </VBox>
+                
+                <!-- Date et Heures -->
+                <VBox spacing="4">
+                    <Label text="Date *" styleClass="form-label"/>
+                    <DatePicker fx:id="dpDateDebut" maxWidth="Infinity"/>
+                </VBox>
+                
+                <HBox spacing="10">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Heure début *" styleClass="form-label"/>
+                        <ComboBox fx:id="cbHeureDebut" maxWidth="Infinity"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Heure fin *" styleClass="form-label"/>
+                        <ComboBox fx:id="cbHeureFin" maxWidth="Infinity"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Indicateur disponibilité -->
+                <Label fx:id="lblDisponibilite" wrapText="true"/>
+                
+                <!-- Participants & Disposition -->
+                <HBox spacing="10">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Participants *" styleClass="form-label"/>
+                        <Spinner fx:id="spParticipants" maxWidth="Infinity" editable="true"/>
+                    </VBox>
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Disposition" styleClass="form-label"/>
+                        <ComboBox fx:id="cbDisposition" maxWidth="Infinity"/>
+                    </VBox>
+                </HBox>
+                
+                <!-- Équipements -->
+                <VBox spacing="4">
+                    <Label text="Équipements souhaités" styleClass="form-label"/>
+                    <ListView fx:id="lvEquipements" prefHeight="120"/>
+                </VBox>
+                
+                <!-- Commentaires -->
+                <VBox spacing="4">
+                    <Label text="Commentaires" styleClass="form-label"/>
+                    <TextArea fx:id="taCommentaires" promptText="Notes supplémentaires..." prefRowCount="2"/>
+                </VBox>
+                
+            </VBox>
+        </ScrollPane>
+        
+        <!-- Boutons -->
+        <HBox spacing="10">
+            <Button fx:id="btnSauvegarder" text="💾 Sauvegarder"
+                    onAction="#handleSauvegarder" styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button fx:id="btnAnnulerForm" text="Annuler"
+                    onAction="#handleAnnulerForm" styleClass="btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+        
+    </VBox>
+    
+</SplitPane>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+
+<VBox spacing="15" styleClass="page-container" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="conference.controller.RapportsController">
+
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <VBox HBox.hgrow="ALWAYS">
+            <Label text="Rapports et Statistiques" styleClass="page-title"/>
+            <Label text="Analysez l'utilisation des salles de conférence" styleClass="page-subtitle"/>
+        </VBox>
+
+        <Button text="📄 Exporter PDF" onAction="#handleExportPDF" styleClass="btn-danger"/>
+        <Button text="📊 Exporter CSV" onAction="#handleExportCSV" styleClass="btn-success"/>
+        <Button text="🖨️ Imprimer" onAction="#handleImprimer" styleClass="btn-secondary"/>
+    </HBox>
+
+    <!-- Filtres -->
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="filter-bar">
+
+        <Label text="Date :" style="-fx-font-weight: bold;"/>
+        <DatePicker fx:id="dateReference" onAction="#handleDateChange"/>
+
+        <Separator orientation="VERTICAL"/>
+
+        <Label text="Vue :" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cbTypeRapport" prefWidth="150" onAction="#handleTypeChange"/>
+
+        <Separator orientation="VERTICAL"/>
+
+        <Label text="Salle :" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="cbSalle" prefWidth="180"/>
+
+        <Region HBox.hgrow="ALWAYS"/>
+
+        <Button text="🔄 Actualiser" onAction="#handleGenerer" styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- Info période affichée -->
+    <Label fx:id="lblPeriodeAffichee" text="Période : " style="-fx-font-size: 14px; -fx-text-fill: #666;"/>
+
+    <!-- Statistiques en cartes -->
+    <HBox spacing="15">
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="5">
+            <Label text="📅" style="-fx-font-size: 24px;"/>
+            <Label fx:id="lblTotalReservations" text="0" styleClass="stat-number"/>
+            <Label text="Réservations totales" styleClass="stat-label"/>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="5">
+            <Label text="📊" style="-fx-font-size: 24px;"/>
+            <Label fx:id="lblTauxOccupation" text="0%" styleClass="stat-number"/>
+            <Label text="Taux d'occupation" styleClass="stat-label"/>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="5">
+            <Label text="⏱️" style="-fx-font-size: 24px;"/>
+            <Label fx:id="lblDureeMoyenne" text="0h" styleClass="stat-number"/>
+            <Label text="Durée moyenne" styleClass="stat-label"/>
+        </VBox>
+
+        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" alignment="CENTER" spacing="5">
+            <Label text="🏆" style="-fx-font-size: 24px;"/>
+            <Label fx:id="lblSallePlusUtilisee" text="—" styleClass="stat-number" style="-fx-font-size: 18px;"/>
+            <Label text="Salle la plus utilisée" styleClass="stat-label"/>
+        </VBox>
+    </HBox>
+
+    <!-- Graphiques -->
+    <HBox spacing="15" VBox.vgrow="ALWAYS">
+        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="card">
+            <Label fx:id="lblTitreGraphique" text="Réservations" styleClass="card-title"/>
+            <BarChart fx:id="chartReservations" VBox.vgrow="ALWAYS">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" label="Période"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Nombre de réservations"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <VBox spacing="10" prefWidth="450" styleClass="card">
+            <Label fx:id="lblTitrePieChart" text="Répartition par salle" styleClass="card-title"/>
+            <PieChart fx:id="chartRepartitionSalles" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+
+</VBox>

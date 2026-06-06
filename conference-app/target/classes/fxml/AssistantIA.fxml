@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="conference.controller.AssistantIAController"
+      spacing="16"
+      styleClass="page-container">
+
+    <!-- En-tête -->
+    <VBox spacing="4">
+        <Label text="🤖 Assistant IA" styleClass="page-title"/>
+        <Label text="Posez vos questions sur la gestion des salles et des réservations"
+               styleClass="page-subtitle"/>
+    </VBox>
+
+    <!-- Corps principal : chat + suggestions -->
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+
+        <!-- Zone de chat (gauche) -->
+        <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="12">
+
+            <!-- Barre d'outils du chat -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="💬 Conversation" styleClass="card-title" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnEffacer"
+                        text="🗑 Effacer"
+                        onAction="#effacerConversation"
+                        styleClass="btn-secondary"/>
+                <Button fx:id="btnExporter"
+                        text="📋 Copier"
+                        onAction="#copierConversation"
+                        styleClass="btn-secondary"/>
+            </HBox>
+
+            <!-- Historique des messages -->
+            <ScrollPane fx:id="scrollPane"
+                        VBox.vgrow="ALWAYS"
+                        fitToWidth="true"
+                        hbarPolicy="NEVER"
+                        styleClass="chat-scroll">
+
+                <VBox fx:id="vboxMessages"
+                      spacing="12"
+                      style="-fx-padding: 8;">
+                    <!-- Les messages s'ajoutent ici dynamiquement -->
+                </VBox>
+
+            </ScrollPane>
+
+            <!-- Indicateur de chargement -->
+            <HBox fx:id="hboxChargement"
+                  alignment="CENTER_LEFT"
+                  spacing="8"
+                  visible="false"
+                  managed="false">
+                <ProgressIndicator prefWidth="20" prefHeight="20"/>
+                <Label text="L'assistant réfléchit..." style="-fx-text-fill: #888;"/>
+            </HBox>
+
+            <!-- Zone de saisie -->
+            <HBox spacing="10" alignment="CENTER">
+
+                <TextArea fx:id="txtInput"
+                          HBox.hgrow="ALWAYS"
+                          promptText="Posez votre question ici... (Entrée pour envoyer, Shift+Entrée pour nouvelle ligne)"
+                          prefHeight="70"
+                          maxHeight="120"
+                          wrapText="true"
+                          styleClass="chat-input"/>
+
+                <Button fx:id="btnEnvoyer"
+                        text="Envoyer ➤"
+                        onAction="#envoyerMessage"
+                        styleClass="btn-primary"
+                        prefWidth="110"
+                        prefHeight="70"/>
+
+            </HBox>
+
+        </VBox>
+
+        <!-- Panneau latéral : suggestions + contexte (droite) -->
+        <VBox spacing="12" prefWidth="260">
+
+            <!-- Suggestions rapides -->
+            <VBox styleClass="card" spacing="10">
+
+                <Label text="⚡ Questions rapides" styleClass="card-title"/>
+
+                <Button text="📅 Mes réservations à venir"
+                        onAction="#suggestionReservations"
+                        maxWidth="Infinity"
+                        styleClass="btn-suggestion"/>
+
+                <Button text="🚪 Salles disponibles aujourd'hui"
+                        onAction="#suggestionSalles"
+                        maxWidth="Infinity"
+                        styleClass="btn-suggestion"/>
+
+                <Button text="📊 Résumé des statistiques"
+                        onAction="#suggestionStatistiques"
+                        maxWidth="Infinity"
+                        styleClass="btn-suggestion"/>
+
+                <Button text="⚠️ Équipements défectueux"
+                        onAction="#suggestionEquipements"
+                        maxWidth="Infinity"
+                        styleClass="btn-suggestion"/>
+
+                <Button text="💡 Conseils d'optimisation"
+                        onAction="#suggestionConseils"
+                        maxWidth="Infinity"
+                        styleClass="btn-suggestion"/>
+
+            </VBox>
+
+            <!-- Infos de session -->
+            <VBox styleClass="card" spacing="8">
+
+                <Label text="📌 Session" styleClass="card-title"/>
+
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="Messages :" style="-fx-text-fill: #888;"/>
+                    <Label fx:id="lblNbMessages" text="0" style="-fx-font-weight: bold;"/>
+                </HBox>
+
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="Modèle :" style="-fx-text-fill: #888;"/>
+                    <Label text="Claude Sonnet" style="-fx-font-weight: bold;"/>
+                </HBox>
+
+                <HBox spacing="6" alignment="CENTER_LEFT">
+                    <Label text="Statut :" style="-fx-text-fill: #888;"/>
+                    <Label fx:id="lblStatutAI"
+                           text="● Prêt"
+                           style="-fx-text-fill: #22c55e; -fx-font-weight: bold;"/>
+                </HBox>
+
+            </VBox>
+
+            <!-- Aide -->
+            <VBox styleClass="card" spacing="8">
+                <Label text="ℹ️ Aide" styleClass="card-title"/>
+                <Label wrapText="true"
+                       style="-fx-text-fill: #888; -fx-font-size: 12px;"
+                       text="• Shift+Entrée : nouvelle ligne&#10;• Entrée : envoyer&#10;• L'IA se souvient du contexte de la conversation en cours"/>
+            </VBox>
+
+        </VBox>
+
+    </HBox>
+
+</VBox>

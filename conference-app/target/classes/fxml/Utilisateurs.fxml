@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="conference.controller.UtilisateursController"
+           orientation="HORIZONTAL" dividerPositions="0.65"
+           styleClass="page-container-split">
+
+    <VBox spacing="12" styleClass="page-container">
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Gestion des Utilisateurs" styleClass="page-title"/>
+                <Label text="Gérez les comptes et les rôles des utilisateurs" styleClass="page-subtitle"/>
+            </VBox>
+            <Button text="+ Nouvel Utilisateur" onAction="#handleNouvelUtilisateur" styleClass="btn-primary"/>
+            <Button text="🔄 Actualiser" onAction="#handleRafraichir" styleClass="btn-secondary"/>
+        </HBox>
+
+        <HBox styleClass="filter-bar" spacing="10">
+            <TextField fx:id="tfRecherche" promptText="🔍 Rechercher un utilisateur..." prefWidth="280"/>
+        </HBox>
+
+        <TableView fx:id="tableUtilisateurs" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colNom" text="Nom" prefWidth="120"/>
+                <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="120"/>
+                <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
+                <TableColumn fx:id="colTelephone" text="Téléphone" prefWidth="120"/>
+                <TableColumn fx:id="colRole" text="Rôle" prefWidth="110"/>
+                <TableColumn fx:id="colStatut" text="Statut" prefWidth="80"/>
+                <TableColumn fx:id="colDerniereConnexion" text="Dernière connexion" prefWidth="140"/>
+            </columns>
+            <placeholder><Label text="Aucun utilisateur trouvé"/></placeholder>
+        </TableView>
+    </VBox>
+
+    <VBox fx:id="formPane" spacing="12" styleClass="page-container form-panel" minWidth="350">
+        <Label fx:id="lblFormTitre" text="Nouvel Utilisateur" styleClass="form-section-title"/>
+
+        <!-- Nom -->
+        <VBox spacing="4">
+            <Label text="Nom *" styleClass="form-label"/>
+            <TextField fx:id="tfNom" promptText="Nom"/>
+            <Label fx:id="lblNomError" styleClass="error-label" text="" visible="false"/>
+        </VBox>
+
+        <!-- Prénom -->
+        <HBox spacing="10">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Prénom *" styleClass="form-label"/>
+                <TextField fx:id="tfPrenom" promptText="Prénom"/>
+                <Label fx:id="lblPrenomError" styleClass="error-label" text="" visible="false"/>
+            </VBox>
+        </HBox>
+
+        <!-- Email -->
+        <VBox spacing="4">
+            <Label text="Email *" styleClass="form-label"/>
+            <TextField fx:id="tfEmail" promptText="email@exemple.com"/>
+            <Label fx:id="lblEmailError" styleClass="error-label" text="" visible="false"/>
+        </VBox>
+
+        <!-- Téléphone -->
+        <VBox spacing="4">
+            <Label text="Téléphone" styleClass="form-label"/>
+            <TextField fx:id="tfTelephone" promptText="+216 XX XXX XXX"/>
+            <Label fx:id="lblTelephoneError" styleClass="error-label" text="" visible="false"/>
+        </VBox>
+
+        <!-- Mot de passe -->
+        <VBox spacing="4">
+            <Label text="Mot de passe" styleClass="form-label"/>
+            <PasswordField fx:id="pfMotDePasse" promptText="Minimum 4 caractères"/>
+            <Label fx:id="lblPasswordError" styleClass="error-label" text="" visible="false"/>
+        </VBox>
+
+        <!-- Confirmation mot de passe -->
+        <VBox spacing="4">
+            <Label text="Confirmer le mot de passe" styleClass="form-label"/>
+            <PasswordField fx:id="pfConfirmMotDePasse" promptText="Retapez votre mot de passe"/>
+            <Label fx:id="lblConfirmPasswordError" styleClass="error-label" text="" visible="false"/>
+        </VBox>
+
+        <!-- Rôle -->
+        <VBox spacing="4">
+            <Label text="Rôle *" styleClass="form-label"/>
+            <ComboBox fx:id="cbRole" maxWidth="Infinity"/>
+        </VBox>
+
+        <!-- Compte actif -->
+        <CheckBox fx:id="chkActif" text="Compte actif" selected="true"/>
+
+        <!-- Message d'information -->
+        <Label fx:id="lblInfo" styleClass="info-label" text="" visible="false"/>
+
+        <Region VBox.vgrow="ALWAYS"/>
+
+        <!-- Boutons -->
+        <HBox spacing="10">
+            <Button text="💾 Sauvegarder" onAction="#handleSauvegarder" styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            <Button text="Annuler" onAction="#handleAnnulerForm" styleClass="btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        </HBox>
+    </VBox>
+
+</SplitPane>

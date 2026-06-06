@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="conference.controller.MainController"
+            styleClass="main-root">
+
+    <!-- SIDEBAR GAUCHE -->
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="240" spacing="2">
+
+            <!-- Logo/Titre -->
+            <VBox alignment="CENTER" spacing="4" styleClass="sidebar-header">
+                <Label text="🏢" style="-fx-font-size: 32px;"/>
+                <Label text="ConférenceApp" styleClass="sidebar-title"/>
+                <Label text="Gestion de Réservation" styleClass="sidebar-subtitle"/>
+            </VBox>
+
+            <Separator styleClass="sidebar-separator"/>
+
+            <!-- Infos utilisateur -->
+            <VBox alignment="CENTER_LEFT" spacing="2" styleClass="user-info-box">
+                <Label text="👤" style="-fx-font-size: 20px;"/>
+                <Label fx:id="lblNomUtilisateur" styleClass="user-name"/>
+                <Label fx:id="lblRole" styleClass="user-role"/>
+            </VBox>
+
+            <Separator styleClass="sidebar-separator"/>
+
+            <!-- Menu Navigation -->
+            <Label text="NAVIGATION" styleClass="menu-section-label"/>
+
+            <Button fx:id="btnDashboard" text="📊  Tableau de Bord"
+                    maxWidth="Infinity" onAction="#handleDashboard" styleClass="sidebar-btn"/>
+
+            <Button fx:id="btnReservations" text="📅  Réservations"
+                    maxWidth="Infinity" onAction="#handleReservations" styleClass="sidebar-btn"/>
+
+            <Button fx:id="btnCalendrier" text="🗓  Calendrier"
+                    maxWidth="Infinity" onAction="#handleCalendrier" styleClass="sidebar-btn"/>
+
+            <!-- Séparateur Gestion -->
+            <Separator fx:id="sepGestion1" styleClass="sidebar-separator"/>
+            <Label fx:id="lblGestionSection" text="GESTION" styleClass="menu-section-label"/>
+
+            <Button fx:id="btnSalles" text="🚪  Salles"
+                    maxWidth="Infinity" onAction="#handleSalles" styleClass="sidebar-btn"/>
+
+            <Button fx:id="btnEquipements" text="🖥  Équipements"
+                    maxWidth="Infinity" onAction="#handleEquipements" styleClass="sidebar-btn"/>
+
+            <Button fx:id="btnUtilisateurs" text="👥  Utilisateurs"
+                    maxWidth="Infinity" onAction="#handleUtilisateurs" styleClass="sidebar-btn"/>
+
+            <!-- Séparateur Outils -->
+            <Separator fx:id="sepGestion2" styleClass="sidebar-separator"/>
+            <Label fx:id="lblOutilsSection" text="OUTILS" styleClass="menu-section-label"/>
+
+            <Button fx:id="btnRapports" text="📈  Rapports"
+                    maxWidth="Infinity" onAction="#handleRapports" styleClass="sidebar-btn"/>
+
+            <Button fx:id="btnAssistantIA" text="🤖  Assistant IA"
+                    maxWidth="Infinity" onAction="#handleAssistantIA" styleClass="sidebar-btn"/>
+
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Separator styleClass="sidebar-separator"/>
+
+            <Button fx:id="btnProfil" text="⚙  Mon Profil"
+                    maxWidth="Infinity" onAction="#handleProfil" styleClass="sidebar-btn"/>
+
+            <Button text="🚪  Déconnexion" maxWidth="Infinity"
+                    onAction="#handleDeconnexion" styleClass="sidebar-btn-danger"/>
+
+        </VBox>
+    </left>
+
+    <!-- ZONE PRINCIPALE -->
+    <center>
+        <VBox>
+            <!-- Barre supérieure -->
+            <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+                <Label text="Système de Gestion de Réservation de Salle de Conférence"
+                       styleClass="topbar-title" HBox.hgrow="ALWAYS"/>
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Notifications -->
+                <StackPane>
+                    <Button fx:id="btnNotifications" text="🔔" styleClass="icon-btn"
+                            onAction="#handleNotifications"/>
+                    <Label fx:id="lblNotifCount" styleClass="notif-badge" text="0"
+                           StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+
+                <Label fx:id="lblDateTime" styleClass="datetime-label"/>
+            </HBox>
+
+            <!-- Contenu des pages -->
+            <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS" styleClass="content-area"/>
+        </VBox>
+    </center>
+
+</BorderPane>
